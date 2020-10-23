@@ -1,0 +1,26 @@
+﻿@using RezaB.Web.VPOS;
+
+@model RezaB.Web.VPOS.QNBFinans.QNBFinansVPOS3DHostModel
+
+@{
+    ViewBag.Title = "Basic VPOS - Request Results";
+}
+
+<div class="jumbotron">
+    <h1>RezaB VPOS</h1>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <h2>Basic VPOS</h2>
+        <p>
+            Test Basic VPOSes.
+        </p>
+    </div>
+    <div class="col-md-12">
+       @foreach (var item in Request.Form.AllKeys)
+       {
+           <p>@item: @Request.Form[item].ToString()</p>
+       }
+    </div>
+</div>

@@ -1,0 +1,23 @@
+﻿@using RezaB.Web.VPOS;
+
+@model RezaB.Web.VPOS.Ziraat.Ziraat3DHostModel
+
+@{
+    ViewBag.Title = "Basic VPOS - Ziraat";
+}
+
+<div class="jumbotron">
+    <h1>RezaB VPOS</h1>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <h2>Basic VPOS</h2>
+        <p>
+            Test Basic VPOSes.
+        </p>
+    </div>
+    <div class="col-md-12">
+        @Html.VPOS3DHostFormFor(model => model)
+    </div>
+</div>

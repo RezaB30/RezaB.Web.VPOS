@@ -1,0 +1,25 @@
+﻿@{
+    ViewBag.Title = "VPOS Manager POS";
+}
+
+<div class="jumbotron">
+    <h1>RezaB VPOS</h1>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <h2>VPOS Manager VPOS</h2>
+        <p>
+            Test VPOS Manager POS.
+        </p>
+    </div>
+    @using (Html.BeginForm())
+    {
+        <div class="col-md-12">
+            <p>Amount: @Html.TextBox("amount")</p>
+            <p>
+                <input type="submit" value="Submit" />
+            </p>
+        </div>
+    }
+</div>

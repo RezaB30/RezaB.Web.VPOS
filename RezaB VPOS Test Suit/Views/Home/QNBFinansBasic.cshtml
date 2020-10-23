@@ -1,0 +1,29 @@
+﻿@{
+    ViewBag.Title = "Basic VPOS - QNB  Finans";
+}
+
+<div class="jumbotron">
+    <h1>RezaB VPOS</h1>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <h2>Basic VPOS</h2>
+        <p>
+            Test Basic VPOSes.
+        </p>
+    </div>
+    @using (Html.BeginForm())
+    {
+        <div class="col-md-12">
+            <p>Merchant ID: @Html.TextBox("merchantId")</p>
+            <p>User Code: @Html.TextBox("userCode")</p>
+            <p>User Pass: @Html.TextBox("userPass")</p>
+            <p>Store Key: @Html.TextBox("storeKey")</p>
+            <p>Amount: @Html.TextBox("amount")</p>
+            <p>
+                <input type="submit" value="Submit" />
+            </p>
+        </div>
+    }
+</div>
