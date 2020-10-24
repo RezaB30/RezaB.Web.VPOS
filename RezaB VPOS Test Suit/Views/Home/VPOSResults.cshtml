@@ -18,9 +18,16 @@
         </p>
     </div>
     <div class="col-md-12">
-       @foreach (var item in Request.Form.AllKeys)
-       {
-           <p>@item: @Request.Form[item].ToString()</p>
-       }
+        @foreach (var item in Request.Form.AllKeys)
+        {
+            <p>@item: @Request.Form[item].ToString()</p>
+        }
+        @if (TempData["keys"] != null)
+        {
+            foreach (var item in (Dictionary<string, string>)TempData["keys"])
+            {
+                <p>@item.Key: @item.Value</p>
+            }
+        }
     </div>
 </div>

@@ -1,0 +1,19 @@
+﻿@using RezaB.Web.VPOS;
+
+@model RezaB.Web.VPOS.PayTR.PayTRVPOS3DHostModel
+
+@{
+    ViewBag.Title = "Basic VPOS - PayTR";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <h2>Basic VPOS</h2>
+        <p>
+            Test Basic VPOSes.
+        </p>
+    </div>
+    <div class="col-md-12">
+        @Html.VPOS3DHostFormFor(model => model)
+    </div>
+</div>
