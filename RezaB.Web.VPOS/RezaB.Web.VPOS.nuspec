@@ -2,14 +2,15 @@
 <package >
   <metadata>
     <id>$id$</id>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <title>RezaB.Web.VPOS</title>
     <authors>Reza Barzegaran</authors>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <license type="expression">MIT</license>
     <description>VPOS Integration</description>
-    <releaseNotes>First releas.</releaseNotes>
+    <releaseNotes>Added HTML form to VPOS model.</releaseNotes>
     <copyright>$copyright$</copyright>
     <tags>VPOS</tags>
+    <repository type="git" url="https://github.com/masteriss/RezaB.Web.VPOS" branch="master" />
   </metadata>
 </package>
