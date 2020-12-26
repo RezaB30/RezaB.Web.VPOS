@@ -1,7 +1,4 @@
-﻿@using RezaB.Web.VPOS;
-
-@model RezaB.Web.VPOS.PayTR.PayTRVPOS3DHostModel
-
+﻿
 @{
     ViewBag.Title = "Basic VPOS - PayTR";
 }
@@ -14,6 +11,6 @@
         </p>
     </div>
     <div class="col-md-12">
-        @Html.VPOS3DHostFormFor(model => model)
+        @Html.Raw(ViewBag.POSForm)
     </div>
 </div>

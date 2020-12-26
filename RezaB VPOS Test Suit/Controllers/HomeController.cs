@@ -77,16 +77,15 @@ namespace RezaB_VPOS_Test_Suit.Controllers
                 MerchantId = merchantId,
                 PurchaseAmount = amount,
                 Storekey = storeKey,
-                user_address = "DENİZLİ",
-                email = "onur.civanoglu@netspeed.com.tr",
                 BillingCustomerName = "ONUR",
-                user_phone = "5387829318",
                 merchant_salt = merchant_salt,
                 InstallmentCount = null,
                 CurrencyCode = (int)CurrencyCodes.TL
             };
 
-            return View(viewName: "PayTRPreSend", model: POSModel);
+            ViewBag.POSForm = POSModel.GetHtmlForm();
+
+            return View(viewName: "PayTRPreSend");
         }
         [HttpPost]
         public ActionResult QNBFinansBasic(string merchantId, string userCode, string userPass, decimal amount, string storeKey)
