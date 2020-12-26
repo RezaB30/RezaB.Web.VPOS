@@ -239,12 +239,23 @@ namespace RezaB.Web.VPOS.PayTR
         private string _email = null;
         private string _user_phone = null;
         private string _user_address = null;
+
         public PayTRVPOS3DHostModel()
         {
-            merchant_oid = Guid.NewGuid().ToString().Replace("-", string.Empty);
+            merchant_oid = OrderId ?? Guid.NewGuid().ToString().Replace("-", string.Empty);
         }
-        public string merchant_salt { get; set; }
-        public string token
+
+        public override string ActionLink
+        {
+            get
+            {
+                return @"https://www.paytr.com/odeme/guvenli/" + token;
+            }
+        }
+
+        public string MerchantSalt { get; set; }
+
+        private string token
         {
             get
             {
@@ -254,7 +265,9 @@ namespace RezaB.Web.VPOS.PayTR
                 return _token;
             }
         }
+
         private int merchant_id { get { return Convert.ToInt32(MerchantId); } }
+
         private string user_ip
         {
             get
@@ -265,8 +278,10 @@ namespace RezaB.Web.VPOS.PayTR
                 return _user_ip;
             }
         }
+
         private string merchant_oid { get; set; } // store order no max 64 char.
-        public string email
+
+        private string email
         {
             get
             {
@@ -276,8 +291,9 @@ namespace RezaB.Web.VPOS.PayTR
                 return _email;
             }
         }
+
         private int payment_amount { get { return Convert.ToInt32(PurchaseAmount * 100); } } // ex : for 34.56 = 34.56 * 100 = 3456
-        private string currency { get { return "TRY"; } } // ex : TL or TRY , EUR , USD ...
+
         private string user_basket
         {
             get
@@ -286,11 +302,16 @@ namespace RezaB.Web.VPOS.PayTR
                 return JsonConvert.SerializeObject(user_basket);
             }
         }
-        private int no_installment { get { return base.InstallmentCount == null ? 1 : 0; } } // 1 = no installment , 0 = yes ins..
-        private int max_installment { get { return base.InstallmentCount == null ? 0 : base.InstallmentCount.Value; } } // set default 0 
+
+        private int no_installment { get { return InstallmentCount == null ? 1 : 0; } } // 1 = no installment , 0 = yes ins..
+
+        private int max_installment { get { return InstallmentCount == null ? 0 : InstallmentCount.Value; } } // set default 0 
+
         private string paytr_token { get { return CalculateHash(); } }
+
         private string user_name { get { return BillingCustomerName; } } // customer fullname max 60 char.
-        public string user_address
+
+        private string user_address
         {
             get
             {
@@ -300,7 +321,8 @@ namespace RezaB.Web.VPOS.PayTR
                 return _user_address;
             }
         } // customer address max 60 char.
-        public string user_phone
+
+        private string user_phone
         {
             get
             {
@@ -310,23 +332,22 @@ namespace RezaB.Web.VPOS.PayTR
                 return _user_phone;
             }
         } // max 20 char.
-        private string merchant_ok_url { get { return base.OkUrl; } } // redirect success page
-        private string merchant_fail_url { get { return base.FailUrl; } } // redirect fail page
+
+        private string merchant_ok_url { get { return OkUrl; } } // redirect success page
+
+        private string merchant_fail_url { get { return FailUrl; } } // redirect fail page
+
         private int test_mode { get { return 0; } } // for test set 1
+
         private int debug_on { get { return 1; } } // set 1 for errors
+
         //public int timeout_limit { get; set; } // if you don't send , will be 30 min.
+
         private string lang { get { return Language; } } // if you send empty , will be tr
-        public override string ActionLink
-        {
-            get
-            {
-                return @"https://www.paytr.com/odeme/guvenli/" + token;
-            }
-        }
 
         public override string CalculateHash()
         {
-            string Combine = string.Concat(MerchantId, user_ip, merchant_oid, email, payment_amount.ToString(), user_basket, no_installment.ToString(), max_installment.ToString(), currency, test_mode.ToString(), merchant_salt);
+            string Combine = string.Concat(MerchantId, user_ip, merchant_oid, email, payment_amount.ToString(), user_basket, no_installment.ToString(), max_installment.ToString(), Enum.GetName(typeof(CurrencyCodes), CurrencyCode), test_mode.ToString(), MerchantSalt);
             HMACSHA256 hmac = new HMACSHA256(Encoding.UTF8.GetBytes(Storekey));
             byte[] b = hmac.ComputeHash(Encoding.UTF8.GetBytes(Combine));
             return Convert.ToBase64String(b);
@@ -338,6 +359,7 @@ namespace RezaB.Web.VPOS.PayTR
             var firstPart = _validIPFirstPart[rand.Next(_validIPFirstPart.Length)];
             return $"{firstPart}.{rand.Next(byte.MaxValue)}.{rand.Next(byte.MaxValue)}.{rand.Next(byte.MaxValue)}";
         }
+
         private string GenerateMailAddress()
         {
             var rand = new Random();
@@ -348,6 +370,7 @@ namespace RezaB.Web.VPOS.PayTR
             }
             return $"{results}{_emailServers[rand.Next(_emailServers.Length)]}";
         }
+
         private string GeneratePhoneNo()
         {
             var rand = new Random();

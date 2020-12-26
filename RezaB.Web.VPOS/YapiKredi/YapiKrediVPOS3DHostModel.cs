@@ -28,7 +28,7 @@ namespace RezaB.Web.VPOS.YapiKredi
         {
             get
             {
-                return CurrencyCode == (int)CurrencyCodes.TL ? "TL" : CurrencyCode == (int)CurrencyCodes.USD ? "US" : "EU";
+                return CurrencyCode == (int)CurrencyCodes.TRY ? "TL" : CurrencyCode == (int)CurrencyCodes.USD ? "US" : "EU";
             }
         }
         public int amount { get { return Convert.ToInt32(base.PurchaseAmount * 100); } }

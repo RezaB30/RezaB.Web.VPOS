@@ -38,7 +38,7 @@ namespace RezaB_VPOS_Test_Suit.Controllers
                 MerchantId = "6700972675",
                 PurchaseAmount = 1,
                 Storekey = "1010052038182556",
-                CurrencyCode = (int)CurrencyCodes.TL,
+                CurrencyCode = (int)CurrencyCodes.TRY,
                 tid = "67893294",
                 InstallmentCount = null,
                 EncKey = "10,10,10,10,10,10,10,10",
@@ -51,7 +51,7 @@ namespace RezaB_VPOS_Test_Suit.Controllers
             {
                 XID = Xid,
                 PurchaseAmount = 1,
-                CurrencyCode = (int)CurrencyCodes.TL,
+                CurrencyCode = (int)CurrencyCodes.TRY,
                 EncKey = "10,10,10,10,10,10,10,10",
                 MerchantId = "6700972675",
                 tid = "67893294",
@@ -78,9 +78,9 @@ namespace RezaB_VPOS_Test_Suit.Controllers
                 PurchaseAmount = amount,
                 Storekey = storeKey,
                 BillingCustomerName = "ONUR",
-                merchant_salt = merchant_salt,
+                MerchantSalt = merchant_salt,
                 InstallmentCount = null,
-                CurrencyCode = (int)CurrencyCodes.TL
+                CurrencyCode = (int)CurrencyCodes.TRY
             };
 
             ViewBag.POSForm = POSModel.GetHtmlForm();
