@@ -13,29 +13,15 @@ namespace RezaB.Web.VPOS.Vakif
 {
     public class Vakifbank3DHostModel : VPOS3DHostModel
     {
-        public string TransactionId { get { return Guid.NewGuid().ToString("N"); } }
-        //[VPOSParameter]
-        public string HostMerchantId { get; set; }
-        //[VPOSParameter]
+        private string TransactionId { get { return Guid.NewGuid().ToString("N"); } }
         public string HostTerminalId { get; set; }
-        //[VPOSParameter]
-        public int AmountCode { get; set; }
-        //[VPOSParameter]
         public string MerchantPassword { get; set; }
-        //[VPOSParameter]
-        public string TransactionType { get { return "Sale"; } }
-        //[VPOSParameter]
-        public bool IsSecure { get { return true; } }
-        //[VPOSParameter]
-        public bool AllowNotEnrolledCard { get { return false; } }
-        //[VPOSParameter]
-        public string SuccessUrl { get; set; }
-        public decimal Amount { get; set; }
+        private string TransactionType { get { return "Sale"; } }
+        private bool IsSecure { get { return true; } }
+        private bool AllowNotEnrolledCard { get { return false; } }
+        private string SuccessUrl { get { return OkUrl; } }
         [VPOSParameter]
         public string Ptkn { get; set; }
-        //[VPOSParameter]
-        //public new string FailUrl { get { return failUrl; } }
-
 
         public override string ActionLink
         {
@@ -47,12 +33,6 @@ namespace RezaB.Web.VPOS.Vakif
         }
         public override string CalculateHash()
         {
-            //var data = string.Format("{0}{1}{2}{3}{4}{5}", HostMerchantId, AmountCode, Amount.ToString("##################"), MerchantPassword, TransactionId, "VBank3DPay2014");
-            //SHA1 sha1 = new SHA1CryptoServiceProvider();
-            //byte[] notHashedBytes = System.Text.Encoding.ASCII.GetBytes(data);
-            //byte[] hashedByte = sha1.ComputeHash(notHashedBytes);
-            //string hashedData = System.Convert.ToBase64String(hashedByte);
-            //return hashedData;
             return null;
         }
 
@@ -61,14 +41,15 @@ namespace RezaB.Web.VPOS.Vakif
             using (var client = new HttpClient())
             {
                 // security issue !! (Shitty Bank) - Confirmed from others
-                string parameters = $"HostMerchantId={HostMerchantId}"
-                                + $"&AmountCode={AmountCode}"
-                                + $"&Amount={Amount}"
+                string parameters = $"HostMerchantId={MerchantId}"
+                                + $"&AmountCode={CurrencyCode}"
+                                + $"&Amount={PurchaseAmount}"
                                 + $"&MerchantPassword={MerchantPassword}"
                                 + $"&TransactionType={TransactionType}"
                                 + $"&IsSecure={IsSecure}"
                                 + $"&AllowNotEnrolledCard={AllowNotEnrolledCard}"
                                 + $"&HostTerminalId={HostTerminalId}"
+                                + $"&TransactionId={TransactionId}"
                                 + $"&SuccessUrl={SuccessUrl}"
                                 + $"&FailUrl={FailUrl}";
                 var data = new StringContent(parameters, Encoding.UTF8, "application/x-www-form-urlencoded");
