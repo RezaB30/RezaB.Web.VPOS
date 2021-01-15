@@ -34,7 +34,7 @@ namespace RezaB.Web.VPOS
 
         public abstract string CalculateHash();
 
-        public MvcHtmlString GetHtmlForm()
+        public MvcHtmlString GetHtmlForm(string method = "post")
         {
             var properties = GetType().GetProperties();
             var validProps = new List<PropertyInfo>();
@@ -48,7 +48,7 @@ namespace RezaB.Web.VPOS
             TagBuilder form = new TagBuilder("form");
             form.MergeAttributes(new Dictionary<string, string>() {
                     { "action", ActionLink },
-                    { "method", "post" },
+                    { "method", method },
                     { "name", "payment" }
                 });
             form.AddCssClass("vpos-redirect-container");

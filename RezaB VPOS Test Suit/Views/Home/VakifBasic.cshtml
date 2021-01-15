@@ -1,0 +1,32 @@
+﻿@using RezaB.Web.VPOS
+@{
+    ViewBag.Title = "VakifBasic";
+}
+
+@*<form method="post" action="https://cptest.vakifbank.com.tr/CommonPayment/api/RegisterTransaction">
+        <input type="text" id="TransactionType" name="TransactionType" value="Sale" />
+        <input type="text" id="MerchantId" name="MerchantId" value="" placeholder="merchantid" />
+        <input type="text" id="TerminalNo" name="TerminalNo" value="" placeholder="terminalno" />
+        <input type="text" id="Password" name="Password" value="" placeholder="password" />
+        <input type="text" id="Pan" name="Pan" value="4543600299100712" placeholder="pan" />
+        <input type="text" id="Expiry" name="Expiry" value="202512" placeholder="expiry"/>
+        <input type="text" id="CurrencyAmount" name="CurrencyAmount" value="1.10" placeholder="amount"/>
+        <input type="text" id="CurrencyCode" name="CurrencyCode" value="949" placeholder="currency"/>
+        <input type="text" id="ClientIP" name="ClientIP" value="127.0.0.1" placeholder="ip"/>
+        <input type="text" id="TransactionDeviceSource" name="TransactionDeviceSource" value="0" placeholder="transactiondevicesource" />
+        <input  type="submit" value="Send"/>
+    </form>*@
+@*<form method="get" action="@ViewBag.ActionLink">
+    <input type="hidden" name="Ptkn" value="@ViewBag.Ptkn" />
+    <input type="submit" />
+</form>*@
+@Html.Raw(ViewBag.html)
+
+@*<html>
+    <head>
+        <title>cp api vpos transaction test</title>
+    </head>
+    <body>
+        <form name="downloadForm" action="https://cpweb.vakifbank.com.tr:4443/CommonPayment/api/VposTransaction" method="POST"><br />HostMerchantId: <input type="text" size="100" name="HostMerchantId" value="UyeIsyeriNo"><br />Password: <input type="text" size="100" name="Password" value="Sifre"><br />TransactionId: <input type="text" size="100" name="TransactionId" value="SorgulanacakIslemNo"><br /> <input type="submit"></form>
+    </body>
+    </html>*@

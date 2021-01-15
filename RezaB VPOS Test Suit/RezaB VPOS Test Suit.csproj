@@ -25,6 +25,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -60,6 +61,8 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -175,6 +178,10 @@
     <Content Include="Views\Home\ZiraatPreSend.cshtml" />
     <Content Include="Views\Home\VPOSManagerPOS.cshtml" />
     <Content Include="Views\Home\VPOSManagerPreSend.cshtml" />
+    <Content Include="Views\Home\VakifBasic.cshtml" />
+    <Content Include="Views\Home\VakifPreSend.cshtml" />
+    <Content Include="Views\Home\VPOSSuccess.cshtml" />
+    <Content Include="Views\Home\VPOSFail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -193,6 +200,9 @@
       <Project>{5a48c71c-c798-4644-b43a-50e9b9ada4e4}</Project>
       <Name>RezaB.Web.VPOS</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

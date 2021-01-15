@@ -17,6 +17,24 @@ namespace RezaB_VPOS_Test_Suit.Controllers
         {
             return View();
         }
+        public ActionResult VakifBasic()
+        {
+            var POSModel = new RezaB.Web.VPOS.Vakif.Vakifbank3DHostModel()
+            {
+                SuccessUrl = $"http://vpostest.netspeed.com.tr/Home/VPOSSuccess",
+                FailUrl = $"http://vpostest.netspeed.com.tr/Home/VPOSFail",
+                AmountCode = 949,
+                Language = "TR",
+                HostMerchantId = "000000001665611",
+                Amount = 0.10m,
+                HostTerminalId = "VP336018",
+                MerchantPassword = "s1T4SjMi"
+            };
+            ViewBag.ActionLink = POSModel.ActionLink;
+            ViewBag.Ptkn = POSModel.Ptkn;
+            ViewBag.html = POSModel.GetHtmlForm("get");
+            return View();
+        }
 
         public ActionResult QNBFinansBasic()
         {
@@ -38,7 +56,6 @@ namespace RezaB_VPOS_Test_Suit.Controllers
                 UserCode = userCode,
                 UserPass = userPass
             };
-
             return View(viewName: "QNBFinansPreSend", model: POSModel);
         }
 
@@ -68,7 +85,14 @@ namespace RezaB_VPOS_Test_Suit.Controllers
         {
             return View();
         }
-
+        public ActionResult VPOSSuccess()
+        {
+            return View();
+        }
+        public ActionResult VPOSFail()
+        {
+            return View();
+        }
         //[HttpGet]
         //public ActionResult VPOSManagerPOS()
         //{
