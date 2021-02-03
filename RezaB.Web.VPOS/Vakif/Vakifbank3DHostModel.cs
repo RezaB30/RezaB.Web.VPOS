@@ -17,13 +17,11 @@ namespace RezaB.Web.VPOS.Vakif
     {
         private string TransactionId { get { return Guid.NewGuid().ToString("N"); } }
         public string HostTerminalId { get; set; }
-        public string MerchantPassword { get; set; }
         private string TransactionType { get { return "Sale"; } }
         private bool IsSecure { get { return true; } }
         private bool AllowNotEnrolledCard { get { return false; } }
-        private string SuccessUrl { get { return OkUrl; } }
         [VPOSParameter]
-        public string Ptkn { get; set; }
+        public string Ptkn { get; private set; }
 
         public override string ActionLink
         {
@@ -48,13 +46,13 @@ namespace RezaB.Web.VPOS.Vakif
                     new KeyValuePair<string, string>( "HostMerchantId", MerchantId ),
                     new KeyValuePair<string, string>( "AmountCode", Convert.ToString(CurrencyCode) ),
                     new KeyValuePair<string, string>( "Amount", PurchaseAmount.ToString("#0.00",CultureInfo.InvariantCulture) ),
-                    new KeyValuePair<string, string>( "MerchantPassword", MerchantPassword ),
+                    new KeyValuePair<string, string>( "MerchantPassword", Storekey ),
                     new KeyValuePair<string, string>( "TransactionType", TransactionType ),
                     new KeyValuePair<string, string>( "IsSecure", Convert.ToString(IsSecure) ),
                     new KeyValuePair<string, string>( "AllowNotEnrolledCard", Convert.ToString(AllowNotEnrolledCard) ),
                     new KeyValuePair<string, string>( "HostTerminalId", HostTerminalId ),
                     new KeyValuePair<string, string>( "TransactionId", TransactionId  ),
-                    new KeyValuePair<string, string>( "SuccessUrl", SuccessUrl ),
+                    new KeyValuePair<string, string>( "SuccessUrl", OkUrl ),
                     new KeyValuePair<string, string>( "FailUrl", FailUrl )
                 };
 

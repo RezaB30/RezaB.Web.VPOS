@@ -29,7 +29,7 @@ namespace RezaB_VPOS_Test_Suit.Controllers
                 MerchantId = "000000001665611",
                 PurchaseAmount = 0.10m,
                 HostTerminalId = "VP336018",
-                MerchantPassword = "s1T4SjMi"
+                Storekey = "s1T4SjMi"
             };
             ViewBag.html = POSModel.GetHtmlForm("GET");
             return View();
