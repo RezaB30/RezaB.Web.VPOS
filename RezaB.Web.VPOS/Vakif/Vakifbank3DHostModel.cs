@@ -58,15 +58,22 @@ namespace RezaB.Web.VPOS.Vakif
                     new KeyValuePair<string, string>( "FailUrl", FailUrl )
                 };
 
-                var response = client.PostAsync("https://cpweb.vakifbank.com.tr/CommonPayment/api/RegisterTransaction", new FormUrlEncodedContent(parameters)).Result;
-                if (response.IsSuccessStatusCode && response.StatusCode == HttpStatusCode.OK)
+                try
                 {
-                    var result = JsonConvert.DeserializeObject<dynamic>(response.Content.ReadAsStringAsync().Result);
-                    var postUrl = result.CommonPaymentUrl.Value; /*+ "?Ptkn=" + result.PaymentToken.Value;*/
-                    Ptkn = result.PaymentToken.Value;
-                    return postUrl;
+                    var response = client.PostAsync("https://cpweb.vakifbank.com.tr/CommonPayment/api/RegisterTransaction", new FormUrlEncodedContent(parameters)).Result;
+                    if (response.IsSuccessStatusCode && response.StatusCode == HttpStatusCode.OK)
+                    {
+                        var result = JsonConvert.DeserializeObject<VakifbankTokenResponse>(response.Content.ReadAsStringAsync().Result);
+                        var postUrl = result.CommonPaymentUrl ?? FailUrl;
+                        Ptkn = result.PaymentToken;
+                        return postUrl;
+                    }
                 }
-                return string.Empty;
+                catch
+                {
+                }
+
+                return FailUrl;
             }
 
         }

@@ -34,7 +34,7 @@ namespace RezaB.Web.VPOS
 
         public abstract string CalculateHash();
 
-        public MvcHtmlString GetHtmlForm(string method = "post")
+        public MvcHtmlString GetHtmlForm(string method = "POST")
         {
             var properties = GetType().GetProperties();
             var validProps = new List<PropertyInfo>();
