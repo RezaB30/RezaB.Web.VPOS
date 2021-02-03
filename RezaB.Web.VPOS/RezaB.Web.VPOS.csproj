@@ -96,7 +96,6 @@
     <Compile Include="QNBFinans\QNBFinansVPOS3DHostModel.cs" />
     <Compile Include="QNBFinans\QNBFinansVPOS3DHostOldModel.cs" />
     <Compile Include="Vakif\Vakifbank3DHostModel.cs" />
-    <Compile Include="VPOS3DHostHelper.cs" />
     <Compile Include="VPOS3DHostModel.cs" />
     <Compile Include="VPOSParameterAttribute.cs" />
     <Compile Include="YapiKredi\RegexMatcher.cs" />

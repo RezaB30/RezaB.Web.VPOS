@@ -1,6 +1,8 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -41,19 +43,22 @@ namespace RezaB.Web.VPOS.Vakif
             using (var client = new HttpClient())
             {
                 // security issue !! (Shitty Bank) - Confirmed from others
-                string parameters = $"HostMerchantId={MerchantId}"
-                                + $"&AmountCode={CurrencyCode}"
-                                + $"&Amount={PurchaseAmount}"
-                                + $"&MerchantPassword={MerchantPassword}"
-                                + $"&TransactionType={TransactionType}"
-                                + $"&IsSecure={IsSecure}"
-                                + $"&AllowNotEnrolledCard={AllowNotEnrolledCard}"
-                                + $"&HostTerminalId={HostTerminalId}"
-                                + $"&TransactionId={TransactionId}"
-                                + $"&SuccessUrl={SuccessUrl}"
-                                + $"&FailUrl={FailUrl}";
-                var data = new StringContent(parameters, Encoding.UTF8, "application/x-www-form-urlencoded");
-                var response = client.PostAsync("https://cpweb.vakifbank.com.tr/CommonPayment/api/RegisterTransaction", data).Result;
+                var parameters = new KeyValuePair<string, string>[]
+                {
+                    new KeyValuePair<string, string>( "HostMerchantId", MerchantId ),
+                    new KeyValuePair<string, string>( "AmountCode", Convert.ToString(CurrencyCode) ),
+                    new KeyValuePair<string, string>( "Amount", PurchaseAmount.ToString("#0.00",CultureInfo.InvariantCulture) ),
+                    new KeyValuePair<string, string>( "MerchantPassword", MerchantPassword ),
+                    new KeyValuePair<string, string>( "TransactionType", TransactionType ),
+                    new KeyValuePair<string, string>( "IsSecure", Convert.ToString(IsSecure) ),
+                    new KeyValuePair<string, string>( "AllowNotEnrolledCard", Convert.ToString(AllowNotEnrolledCard) ),
+                    new KeyValuePair<string, string>( "HostTerminalId", HostTerminalId ),
+                    new KeyValuePair<string, string>( "TransactionId", TransactionId  ),
+                    new KeyValuePair<string, string>( "SuccessUrl", SuccessUrl ),
+                    new KeyValuePair<string, string>( "FailUrl", FailUrl )
+                };
+
+                var response = client.PostAsync("https://cpweb.vakifbank.com.tr/CommonPayment/api/RegisterTransaction", new FormUrlEncodedContent(parameters)).Result;
                 if (response.IsSuccessStatusCode && response.StatusCode == HttpStatusCode.OK)
                 {
                     var result = JsonConvert.DeserializeObject<dynamic>(response.Content.ReadAsStringAsync().Result);
