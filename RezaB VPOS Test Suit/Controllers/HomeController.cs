@@ -22,16 +22,17 @@ namespace RezaB_VPOS_Test_Suit.Controllers
         {
             var POSModel = new RezaB.Web.VPOS.Vakif.Vakifbank3DHostModel()
             {
-                OkUrl = Url.Action("VPOSSuccess", null,null, Request.Url.Scheme),// $"http://mytest.myvpostest123.com.tr/Home/VPOSSuccess"
-                FailUrl = Url.Action("VPOSFail", null, null, Request.Url.Scheme),
+                OkUrl = Url.Action("VPOSSuccess", null,null, Request.Url.Scheme, "vpostest.netspeed.com.tr"),// $"http://mytest.myvpostest123.com.tr/Home/VPOSSuccess"
+                FailUrl = Url.Action("VPOSFail", null, null, Request.Url.Scheme, "vpostest.netspeed.com.tr"),
                 CurrencyCode = 949,
                 Language = "TR",
                 MerchantId = "000000001665611",
                 PurchaseAmount = 0.10m,
                 HostTerminalId = "VP336018",
-                Storekey = "s1T4SjMi"
+                Storekey = "s1T4SjMi",
+                FormMethod = "GET"
             };
-            ViewBag.html = POSModel.GetHtmlForm("GET");
+            ViewBag.html = POSModel.GetHtmlForm();
             return View();
         }
 
