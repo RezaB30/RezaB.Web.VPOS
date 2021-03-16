@@ -29,9 +29,10 @@ namespace RezaB_VPOS_Test_Suit.Controllers
                 MerchantId = "000000001665611",
                 PurchaseAmount = 0.10m,
                 HostTerminalId = "VP336018",
-                Storekey = "s1T4SjMi"
+                Storekey = "s1T4SjMi",
+                BillingCustomerName = "AAA"
             };
-            ViewBag.html = POSModel.GetHtmlForm("GET");
+            ViewBag.html = POSModel.GetHtmlForm();
             return View();
         }
 

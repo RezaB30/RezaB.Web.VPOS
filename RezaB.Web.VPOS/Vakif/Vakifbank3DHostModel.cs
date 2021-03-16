@@ -53,7 +53,8 @@ namespace RezaB.Web.VPOS.Vakif
                     new KeyValuePair<string, string>( "HostTerminalId", HostTerminalId ),
                     new KeyValuePair<string, string>( "TransactionId", TransactionId  ),
                     new KeyValuePair<string, string>( "SuccessUrl", OkUrl ),
-                    new KeyValuePair<string, string>( "FailUrl", FailUrl )
+                    new KeyValuePair<string, string>( "FailUrl", FailUrl ),
+                    new KeyValuePair<string, string>( "OrderDescription", BillingCustomerName)
                 };
 
                 try
